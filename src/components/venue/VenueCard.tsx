@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Users, Star, Utensils, CheckCircle } from "lucide-react";
-import axios from "axios";
 
 import { Venue } from "@/types";
 import { Badge } from "@/components/ui/badge";
 import DateSelector from "@/components/user/DateSelector";
 import BookingModal from "@/components/ui/BookingModal";
+import { supabase } from "@/lib/supabase";
 
 interface VenueCardProps {
   venue: Venue;
@@ -37,11 +37,7 @@ const VenueCard: React.FC<VenueCardProps> = ({ venue, index = 0 }) => {
 
   const grandTotal = venueTotal + foodTotal;
 
-  const handleDateChange = (
-    start: Date,
-    end: Date,
-    totalDays: number
-  ) => {
+  const handleDateChange = (start: Date, end: Date, totalDays: number) => {
     setStartDate(start);
     setEndDate(end);
     setDays(totalDays);
@@ -55,32 +51,46 @@ const VenueCard: React.FC<VenueCardProps> = ({ venue, index = 0 }) => {
     setShowModal(true);
   };
 
+  // ✅ SUPABASE BOOKING SAVE
   const confirmBooking = async () => {
+    if (!startDate || !endDate) return;
+
     try {
       setSaving(true);
 
-      await axios.post("http://localhost:5000/api/bookings", {
-        venueId: venue.id,
-        venueName: venue.name,
-        city: venue.city,
+      const { error } = await supabase.from("bookings").insert([
+        {
+          venue_id: venue.id,
+          venue_name: venue.name,
+          city: venue.city,
 
-        startDate,
-        endDate,
-        days,
+          start_date: startDate,
+          end_date: endDate,
+          days: days,
 
-        venueTotal,
-        foodTotal,
-        grandTotal,
+          venue_total: venueTotal,
+          food_total: foodTotal,
+          grand_total: grandTotal,
 
-        food: {
-          lunch,
-          dinner,
+          food: {
+            lunch,
+            dinner,
+          },
+
+          status: "pending",
         },
-      });
+      ]);
+
+      if (error) {
+        console.error("Supabase booking error:", error);
+        alert("Failed to save booking");
+        return;
+      }
 
       setShowModal(false);
       alert("Booking confirmed 🎉");
-    } catch (error) {
+    } catch (err) {
+      console.error(err);
       alert("Failed to save booking");
     } finally {
       setSaving(false);
@@ -206,6 +216,7 @@ const VenueCard: React.FC<VenueCardProps> = ({ venue, index = 0 }) => {
           venueTotal={venueTotal}
           foodTotal={foodTotal}
           grandTotal={grandTotal}
+          saving={saving}
         />
       )}
     </>
