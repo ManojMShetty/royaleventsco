@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Royal Color Palette */
+    --background: 30 20% 97%;
+    --foreground: 0 0% 15%;
+
+    --card: 30 25% 99%;
+    --card-foreground: 0 0% 15%;
+
+    --popover: 30 25% 99%;
+    --popover-foreground: 0 0% 15%;
+
+    /* Deep Wine/Maroon Primary */
+    --primary: 345 60% 22%;
+    --primary-foreground: 30 20% 97%;
+
+    /* Ivory Secondary */
+    --secondary: 36 33% 94%;
+    --secondary-foreground: 345 60% 22%;
+
+    /* Muted Warm Beige */
+    --muted: 30 20% 92%;
+    --muted-foreground: 0 0% 40%;
+
+    /* Gold Accent */
+    --accent: 43 74% 49%;
+    --accent-foreground: 0 0% 10%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 20% 88%;
+    --input: 30 20% 88%;
+    --ring: 43 74% 49%;
+
+    --radius: 0.75rem;
+
+    /* Custom Royal Colors */
+    --gold: 43 74% 49%;
+    --gold-light: 43 74% 70%;
+    --gold-dark: 43 74% 35%;
+    --wine: 345 60% 22%;
+    --wine-light: 345 45% 35%;
+    --wine-dark: 345 70% 15%;
+    --ivory: 36 33% 97%;
+    --ivory-dark: 36 33% 94%;
+    --charcoal: 0 0% 25%;
+    --beige: 30 30% 85%;
+
+    /* Gradients */
+    --gradient-royal: linear-gradient(135deg, hsl(345 60% 22%) 0%, hsl(345 70% 15%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(43 74% 49%) 0%, hsl(43 74% 60%) 100%);
+    --gradient-hero: linear-gradient(180deg, hsla(345, 60%, 15%, 0.85) 0%, hsla(345, 60%, 22%, 0.6) 50%, transparent 100%);
+    --gradient-card: linear-gradient(145deg, hsl(30 25% 99%) 0%, hsl(36 33% 97%) 100%);
+
+    /* Shadows */
+    --shadow-royal: 0 4px 20px -4px hsla(345, 60%, 22%, 0.15);
+    --shadow-gold: 0 4px 20px -4px hsla(43, 74%, 49%, 0.3);
+    --shadow-elevated: 0 10px 40px -10px hsla(0, 0%, 0%, 0.15);
+    --shadow-card: 0 2px 12px -2px hsla(0, 0%, 0%, 0.08);
+
+    --sidebar-background: 30 20% 97%;
+    --sidebar-foreground: 0 0% 15%;
+    --sidebar-primary: 345 60% 22%;
+    --sidebar-primary-foreground: 30 20% 97%;
+    --sidebar-accent: 36 33% 94%;
+    --sidebar-accent-foreground: 345 60% 22%;
+    --sidebar-border: 30 20% 88%;
+    --sidebar-ring: 43 74% 49%;
+  }
+
+  .dark {
+    --background: 345 40% 8%;
+    --foreground: 30 20% 97%;
+
+    --card: 345 35% 12%;
+    --card-foreground: 30 20% 97%;
+
+    --popover: 345 35% 12%;
+    --popover-foreground: 30 20% 97%;
+
+    --primary: 43 74% 49%;
+    --primary-foreground: 345 60% 12%;
+
+    --secondary: 345 30% 18%;
+    --secondary-foreground: 30 20% 97%;
+
+    --muted: 345 25% 20%;
+    --muted-foreground: 30 15% 65%;
+
+    --accent: 43 74% 49%;
+    --accent-foreground: 345 60% 12%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 345 25% 20%;
+    --input: 345 25% 20%;
+    --ring: 43 74% 49%;
+
+    --sidebar-background: 345 40% 8%;
+    --sidebar-foreground: 30 20% 97%;
+    --sidebar-primary: 43 74% 49%;
+    --sidebar-primary-foreground: 345 60% 12%;
+    --sidebar-accent: 345 30% 18%;
+    --sidebar-accent-foreground: 30 20% 97%;
+    --sidebar-border: 345 25% 20%;
+    --sidebar-ring: 43 74% 49%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .royal-gradient {
+    background: var(--gradient-royal);
+  }
+
+  .gold-gradient {
+    background: var(--gradient-gold);
+  }
+
+  .hero-overlay {
+    background: var(--gradient-hero);
+  }
+
+  .card-gradient {
+    background: var(--gradient-card);
+  }
+
+  .gold-border {
+    border: 1px solid hsl(var(--gold));
+    box-shadow: 0 0 0 1px hsla(43, 74%, 49%, 0.1);
+  }
+
+  .gold-glow {
+    box-shadow: 0 0 20px hsla(43, 74%, 49%, 0.3);
+  }
+
+  .royal-shadow {
+    box-shadow: var(--shadow-royal);
+  }
+
+  .elevated-shadow {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .card-shadow {
+    box-shadow: var(--shadow-card);
+  }
+
+  .gold-text {
+    color: hsl(var(--gold));
+  }
+
+  .wine-text {
+    color: hsl(var(--wine));
+  }
+
+  /* Gold divider */
+  .gold-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, hsl(var(--gold)), transparent);
+  }
+
+  /* Royal card hover effect */
+  .royal-card {
+    @apply bg-card rounded-xl card-shadow transition-all duration-300;
+  }
+
+  .royal-card:hover {
+    @apply elevated-shadow;
+    transform: translateY(-4px);
+  }
+
+  /* Premium button styles */
+  .btn-royal {
+    @apply bg-primary text-primary-foreground font-medium px-6 py-3 rounded-lg transition-all duration-300;
+  }
+
+  .btn-royal:hover {
+    @apply opacity-90;
+    box-shadow: var(--shadow-royal);
+  }
+
+  .btn-gold {
+    background: var(--gradient-gold);
+    @apply text-primary font-semibold px-6 py-3 rounded-lg transition-all duration-300;
+  }
+
+  .btn-gold:hover {
+    box-shadow: var(--shadow-gold);
+    transform: translateY(-2px);
+  }
+
+  /* Elegant input */
+  .royal-input {
+    @apply bg-ivory border border-border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gold transition-all duration-200;
+  }
+
+  /* Badge styles */
+  .badge-gold {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+    background: hsla(43, 74%, 49%, 0.15);
+    color: hsl(var(--gold-dark));
+    border: 1px solid hsla(43, 74%, 49%, 0.3);
+  }
+
+  .badge-wine {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+    background: hsla(345, 60%, 22%, 0.1);
+    color: hsl(var(--wine));
+    border: 1px solid hsla(345, 60%, 22%, 0.2);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .font-sans {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
