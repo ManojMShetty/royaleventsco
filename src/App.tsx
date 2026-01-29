@@ -26,62 +26,57 @@ import VendorDashboard from "./pages/VendorDashboard";
 import VendorAvailability from "./pages/VendorAvailability";
 import VendorBookings from "./pages/vendor/VendorBookings";
 
-/* ===== ADMIN ===== */
-import AdminDashboard from "./pages/AdminDashboard";
-import AdminBookings from "./pages/admin/AdminBookings";
+/* ===== ADMIN (SUPABASE) ===== */
+import AdminDashboard from "./pages/admin/AdminDashboard";
 
 /* ===== MISC ===== */
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              {/* ===== PUBLIC ROUTES ===== */}
+              <Route path="/" element={<Index />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/venues" element={<Venues />} />
+              <Route path="/venue/:id" element={<VenueDetail />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/service/:id" element={<ServiceDetail />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/booking" element={<Booking />} />
+              <Route path="/booking-success" element={<BookingSuccess />} />
 
-            {/* ===== PUBLIC ROUTES ===== */}
-            <Route path="/" element={<Index />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/venues" element={<Venues />} />
-            <Route path="/venue/:id" element={<VenueDetail />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/service/:id" element={<ServiceDetail />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/booking" element={<Booking />} />
-            <Route path="/booking-success" element={<BookingSuccess />} />
+              {/* ===== USER ROUTES ===== */}
+              <Route path="/dashboard" element={<UserDashboard />} />
+              <Route path="/my-bookings" element={<UserBookings />} />
 
-            {/* ===== USER ROUTES ===== */}
-            <Route path="/dashboard" element={<UserDashboard />} />
-            <Route path="/my-bookings" element={<UserBookings />} />
+              {/* ===== VENDOR ROUTES ===== */}
+              <Route path="/vendor" element={<VendorDashboard />} />
+              <Route path="/vendor/venues" element={<VendorDashboard />} />
+              <Route path="/vendor/availability" element={<VendorAvailability />} />
+              <Route path="/vendor/bookings" element={<VendorBookings />} />
+              <Route path="/vendor/earnings" element={<VendorDashboard />} />
 
-            {/* ===== VENDOR ROUTES ===== */}
-            <Route path="/vendor" element={<VendorDashboard />} />
-            <Route path="/vendor/venues" element={<VendorDashboard />} />
-            <Route path="/vendor/availability" element={<VendorAvailability />} />
-            <Route path="/vendor/bookings" element={<VendorBookings />} />
-            <Route path="/vendor/earnings" element={<VendorDashboard />} />
+              {/* ===== ADMIN ROUTES (SUPABASE) ===== */}
+              <Route path="/admin" element={<AdminDashboard />} />
 
-            {/* ===== ADMIN ROUTES ===== */}
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/verification" element={<AdminDashboard />} />
-            <Route path="/admin/analytics" element={<AdminDashboard />} />
-            <Route path="/admin/bookings" element={<AdminBookings />} />
-            <Route path="/admin/settings" element={<AdminDashboard />} />
-
-            {/* ===== 404 ===== */}
-            <Route path="*" element={<NotFound />} />
-
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </AuthProvider>
-  </QueryClientProvider>
-);
+              {/* ===== 404 ===== */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </AuthProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
